@@ -12,9 +12,9 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gobuffalo/packr"
 	_ "github.com/lib/pq"
+	"github.com/negbie/logp"
 	"github.com/sipcapture/heplify-server"
 	"github.com/sipcapture/heplify-server/config"
-	"github.com/negbie/logp"
 )
 
 var (
@@ -382,7 +382,15 @@ func (s *SQLHomer5) bulkInsert(query string, rows []interface{}, values string) 
 
 	logp.Debug("sql", "%s\n\n%v\n\n", query, rows)
 
-	_, err := s.db.Exec(query, rows...)
+	//prepare the statement
+	stmt, err := s.db.Prepare(query)
+	if err != nil {
+		logp.Err("%v", err)
+		return
+	}
+
+	_, err = stmt.Exec(rows...)
+	// _, err := s.db.Exec(query, rows...)
 	if err != nil {
 		logp.Err("%v", err)
 	}
