@@ -11,13 +11,13 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/negbie/logp"
 	"github.com/sipcapture/heplify-server"
 	"github.com/sipcapture/heplify-server/config"
 	"github.com/sipcapture/heplify-server/database"
 	"github.com/sipcapture/heplify-server/elastic"
 	"github.com/sipcapture/heplify-server/metric"
 	"github.com/sipcapture/heplify-server/queue"
-	"github.com/negbie/logp"
 )
 
 type HEPInput struct {
@@ -39,8 +39,8 @@ type HEPStats struct {
 }
 
 var (
-	inCh = make(chan []byte, 20000)
-	dbCh = make(chan *decoder.HEP, 200000)
+	inCh = make(chan []byte, 200000)
+	dbCh = make(chan *decoder.HEP, 1500000)
 	mqCh = make(chan []byte, 20000)
 	pmCh = make(chan *decoder.HEP, 20000)
 	esCh = make(chan *decoder.HEP, 20000)

@@ -23,8 +23,8 @@ RUN apk --no-cache add ca-certificates m4 bash
 WORKDIR /root/
 
 COPY --from=builder /go/bin/heplify-server .
-COPY docker/files/entrypoint.sh /entrypoint.sh
-COPY docker/files/heplify-server.toml.m4 /root/heplify-server.toml.m4
+COPY build/image/files/entrypoint.sh /entrypoint.sh
+COPY build/image/files/heplify-server.toml.m4 /root/heplify-server.toml.m4
 
 RUN chmod 744 /root/heplify-server.toml.m4 \
   && chmod a+rx /entrypoint.sh
