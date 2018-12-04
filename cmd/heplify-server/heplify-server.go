@@ -15,6 +15,13 @@ import (
 	"github.com/negbie/logp"
 	"github.com/sipcapture/heplify-server/config"
 	"github.com/sipcapture/heplify-server/server"
+
+	"github.com/sipcapture/heplify-server/cmd/heplify-server/app"
+	"github.com/sipcapture/heplify-server/cmd/heplify-server/app/options"
+
+	"github.com/seanchann/goutil/flag"
+	"github.com/seanchann/goutil/logs"
+	"github.com/spf13/pflag"
 )
 
 type server interface {
@@ -67,8 +74,23 @@ func tomlExists(f string) bool {
 	}
 	return err == nil
 }
+func homer_main() {
 
+	opt := options.NewSIPCapOptions()
+	// Parse command line flags.
+	opt.AddFlags(pflag.CommandLine)
+
+	flag.InitFlags()
+	logs.InitLogs()
+	defer logs.FlushLogs()
+
+	if err := app.Run(opt); err != nil {
+		fmt.Fprintf(os.Stderr, "%v\n", err)
+		os.Exit(1)
+	}
+}
 func main() {
+	go homer_main()
 	if config.Setting.Version {
 		fmt.Println(config.Version)
 		os.Exit(0)
