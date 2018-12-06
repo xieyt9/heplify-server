@@ -18,13 +18,14 @@ RUN cd ${BUILD_ROOT} \
 FROM alpine:latest
 LABEL maintainer="zhouxq@ti-net.com.cn"
 
-RUN apk --no-cache add ca-certificates m4 bash
+RUN apk --no-cache add ca-certificates tzdata m4 bash
 
 WORKDIR /root/
 
 COPY --from=builder /go/bin/heplify-server .
 COPY build/image/files/entrypoint.sh /entrypoint.sh
-COPY build/image/files/heplify-server.toml.m4 /root/heplify-server.toml.m4
+COPY ui/homer-ui /homer-ui
+COPY build/image/files/heplify-server.toml.m4 /root/heplify-server.toml
 
 RUN chmod 744 /root/heplify-server.toml.m4 \
   && chmod a+rx /entrypoint.sh

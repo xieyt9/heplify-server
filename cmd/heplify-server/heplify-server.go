@@ -34,9 +34,9 @@ func init() {
 	var logging logp.Logging
 	var fileRotator logp.FileRotator
 
-	c := multiconfig.New()
+	//c := multiconfig.New()
 	cfg := new(config.HeplifyServer)
-	c.MustLoad(cfg)
+	//c.MustLoad(cfg)
 	config.Setting = *cfg
 
 	if tomlExists(config.Setting.Config) {
