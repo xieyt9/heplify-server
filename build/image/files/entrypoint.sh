@@ -19,4 +19,8 @@ m4 -D LISTEN_HOST=$ENV_LISTEN_HOST \
 
 chmod 775 $PATH_HEPLIFY_SERVER_TOML
 
-/root/heplify-server /root/heplify-server.toml
+homerdatadsn="$ENV_DB_USER:$ENV_DB_PASSWORD@tcp($ENV_DB_HOST:3306)/homer_data"
+DefaultARGS='--alsologtostderr=true --admin-pwd='test123' --insecure-port=80  --ui-path='/homer-ui/' --homer-data-dsn='$homerdatadsn''
+
+
+/root/heplify-server $DefaultARGS 
