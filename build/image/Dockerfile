@@ -25,9 +25,9 @@ WORKDIR /root/
 COPY --from=builder /go/bin/heplify-server .
 COPY build/image/files/entrypoint.sh /entrypoint.sh
 COPY ui/homer-ui /homer-ui
-COPY build/image/files/heplify-server.toml.m4 /root/heplify-server.toml
+COPY build/image/files/heplify-server.toml.m4 /root/heplify-server.toml.m4
 
-RUN chmod 744 /root/heplify-server.toml \
+RUN chmod 744 /root/heplify-server.toml.m4 \
   && chmod a+rx /entrypoint.sh
 
 EXPOSE 9060

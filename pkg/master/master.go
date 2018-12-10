@@ -37,7 +37,7 @@ func Run(cfg *Config) error {
 		return fmt.Errorf("api server init failure")
 	}
 	if err := serverHandler.Run(); err != nil {
-		return fmt.Errorf("api server run failure")
+		return fmt.Errorf("api server run failure （%v）",err)
 	}
 
 	close(quit)
