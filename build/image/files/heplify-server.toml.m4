@@ -35,3 +35,7 @@ LogLvl          = "info"
 LogStd          = true
 Config          = "/root/heplify-server.toml"
 Version         = false
+InsecurePort    = 80
+AdminPwd        = "test123"
+SwaggerPath     = ""
+UIPath          = "/homer-ui/"

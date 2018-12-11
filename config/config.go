@@ -40,14 +40,18 @@ type HeplifyServer struct {
 	LogDbg          string   `default:""`
 	LogLvl          string   `default:"info"`
 	LogStd          bool     `default:"false"`
-	Config          string   `default:"./heplify-server.toml"`
+	Config          string   `default:"/root/heplify-server.toml"`
 	Version         bool     `default:"false"`
+	InsecurePort    int      `default:"80"`
+	AdminPwd        string   `default:"test123"`
+	SwaggerPath     string   `default:"/third_party/swagger-ui"`
+	UIPath          string   `default:"/homer-ui/"`
 }
 
 func NewConfig() *HeplifyServer {
 	return &HeplifyServer{
 		HEPAddr:         "0.0.0.0:9060",
-		HEPTCPAddr:      "",
+		HEPTCPAddr:      "0.0.0.0:9060",
 		HEPTLSAddr:      "0.0.0.0:9060",
 		ESAddr:          "",
 		ESDiscovery:     true,
@@ -83,6 +87,10 @@ func NewConfig() *HeplifyServer {
 		LogStd:          false,
 		Config:          "./heplify-server.toml",
 		Version:         false,
+		InsecurePort:    80,
+		AdminPwd:        "test123",
+		SwaggerPath:     "/third_party/swagger-ui",
+        UIPath:          "/homer-ui/",
 	}
 }
 

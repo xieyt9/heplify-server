@@ -19,9 +19,9 @@ import (
 	"github.com/sipcapture/heplify-server/cmd/heplify-server/app"
 	"github.com/sipcapture/heplify-server/cmd/heplify-server/app/options"
 
-	"github.com/seanchann/goutil/flag"
+	//"github.com/seanchann/goutil/flag"
 	"github.com/seanchann/goutil/logs"
-	"github.com/spf13/pflag"
+	//"github.com/spf13/pflag"
 )
 
 type server interface {
@@ -35,7 +35,8 @@ func init() {
 	var fileRotator logp.FileRotator
 
 	//c := multiconfig.New()
-	cfg := new(config.HeplifyServer)
+	cfg := config.Get()
+	//new(config.HeplifyServer)
 	//c.MustLoad(cfg)
 	config.Setting = *cfg
 
@@ -77,18 +78,21 @@ func tomlExists(f string) bool {
 func homer_main() {
 
 	opt := options.NewSIPCapOptions()
-	// Parse command line flags.
-	opt.AddFlags(pflag.CommandLine)
-
-	flag.InitFlags()
 	logs.InitLogs()
 	defer logs.FlushLogs()
-
+	opt.HomerDataDSN = fmt.Sprintf("%s:%s@tcp(%s)/homer_data?charset=utf8&parseTime=True&loc=Local",config.Setting.DBUser,
+									config.Setting.DBPass,
+									config.Setting.DBAddr)
+	opt.Server.UIPath = config.Setting.UIPath
+	opt.Server.SwaggerPath = config.Setting.SwaggerPath
+	opt.Server.AdminPwd = config.Setting.AdminPwd
+	opt.Server.InsecurePort = config.Setting.InsecurePort
 	if err := app.Run(opt); err != nil {
 		fmt.Fprintf(os.Stderr, "%v\n", err)
 		os.Exit(1)
 	}
 }
+
 func main() {
 	go homer_main()
 	if config.Setting.Version {

@@ -381,7 +381,7 @@ func (s *SQLHomer5) bulkInsert(query string, rows []interface{}, values string) 
 	}
 
 	logp.Debug("sql", "%s\n\n%v\n\n", query, rows)
-
+	
 	//prepare the statement
 	stmt, err := s.db.Prepare(query)
 	if err != nil {
