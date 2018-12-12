@@ -1,6 +1,6 @@
 package options
 
-import "github.com/spf13/pflag"
+// import "github.com/spf13/pflag"
 
 //ServerOption contains apiserver options
 type ServerOption struct {
