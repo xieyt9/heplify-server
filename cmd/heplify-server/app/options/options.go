@@ -26,6 +26,7 @@ func NewSIPCapOptions() *SIPCapOptions {
 }
 
 //AddFlags add flags
+/*
 func (o *SIPCapOptions) AddFlags(fs *pflag.FlagSet) {
 
 	fs.StringVar(&o.HomerDataDSN, "homer-data-dsn", "dbuser:dbpwd@tcp(127.0.0.1:3306)/homer_data?charset=utf8&parseTime=True&loc=Local", ""+
@@ -37,3 +38,4 @@ func (o *SIPCapOptions) AddFlags(fs *pflag.FlagSet) {
 
 	o.Server.AddFlags(fs)
 }
+*/

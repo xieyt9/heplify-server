@@ -22,6 +22,8 @@ RUN apk --no-cache add ca-certificates tzdata m4 bash
 
 WORKDIR /root/
 
+ENV TZ=Asia/Shanghai 
+
 COPY --from=builder /go/bin/heplify-server .
 COPY build/image/files/entrypoint.sh /entrypoint.sh
 COPY ui/homer-ui /homer-ui

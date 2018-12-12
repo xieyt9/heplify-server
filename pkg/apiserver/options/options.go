@@ -21,7 +21,7 @@ func NewServerOption() *ServerOption {
 		SecurePort:   0,
 	}
 }
-
+/*
 //AddFlags add api server options
 func (s *ServerOption) AddFlags(fs *pflag.FlagSet) {
 
@@ -50,3 +50,4 @@ func (s *ServerOption) AddFlags(fs *pflag.FlagSet) {
 	fs.StringVar(&s.AdminPwd, "admin-pwd", s.AdminPwd, ""+
 		"admin password")
 }
+*/

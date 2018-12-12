@@ -78,9 +78,9 @@ func tomlExists(f string) bool {
 func homer_main() {
 
 	opt := options.NewSIPCapOptions()
-	logs.InitLogs()
-	defer logs.FlushLogs()
-	opt.HomerDataDSN = fmt.Sprintf("%s:%s@tcp(%s)/homer_data?charset=utf8&parseTime=True&loc=Local",config.Setting.DBUser,
+//	logs.InitLogs()
+//	defer logs.FlushLogs()
+	opt.HomerDataDSN = fmt.Sprintf("%s:%s@tcp(%s)/homer_data",config.Setting.DBUser,
 									config.Setting.DBPass,
 									config.Setting.DBAddr)
 	opt.Server.UIPath = config.Setting.UIPath
