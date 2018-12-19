@@ -38,3 +38,5 @@ require (
 )
 
 replace github.com/sipcapture/heplify-server => github.com/ti-net/heplify-server v0.0.0-20181121032026-54aa4226ca84
+
+replace golang.org/x/sync => github.com/golang/sync master
