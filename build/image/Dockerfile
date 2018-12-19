@@ -14,7 +14,7 @@ RUN cd ${BUILD_ROOT} \
   && cp vendor/* /go/src/ -rf \
   && cd ${BUILD_ROOT}/cmd/heplify-server \
   && ls \
-  && CGO_ENABLED=0 GOOS=linux go build -v  -a -ldflags '-s -w' -installsuffix cgo -o  /go/bin/heplify-server \
+  && CGO_ENABLED=0 GOOS=linux go build -mod=vendor  -v  -a -ldflags '-s -w' -installsuffix cgo -o  /go/bin/heplify-server \
   && rm -rf /go/src/
 
 FROM alpine:latest
