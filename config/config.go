@@ -90,7 +90,7 @@ func NewConfig() *HeplifyServer {
 		InsecurePort:    80,
 		AdminPwd:        "test123",
 		SwaggerPath:     "/third_party/swagger-ui",
-        UIPath:          "/homer-ui/",
+		UIPath:          "/homer-ui/",
 	}
 }
 
