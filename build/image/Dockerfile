@@ -15,7 +15,7 @@ RUN cd ${BUILD_ROOT} \
   && cd ${BUILD_ROOT}/cmd/heplify-server \
   && ls \
   && CGO_ENABLED=0 GOOS=linux go build -v  -a -ldflags '-s -w' -installsuffix cgo -o  /go/bin/heplify-server \
-RUN rm -rf /go/src/
+  && rm -rf /go/src/
 
 FROM alpine:latest
 LABEL maintainer="zhouxq@ti-net.com.cn"
