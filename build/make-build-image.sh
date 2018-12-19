@@ -83,7 +83,7 @@ build_image() {
   dockerfile=$BUILD_ROOT_DIR/image/Dockerfile
   build_context=$ROOT_DIR
 
-  image_base=registry.cn-beijing.aliyuncs.com/tinet-hub/heplify-server
+  image_base=registry.cn-beijing.aliyuncs.com/tinet-hub/homer
   image_tag=${image_base}
 
   get_version_vars $ROOT_DIR
