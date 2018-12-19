@@ -3,18 +3,21 @@ FROM golang:alpine as builder
 LABEL maintainer="zhouxq@ti-net.com.cn"
 
 RUN set -ex \
-  && apk add --update  bash\
+  && apk add --update git bash\
   && rm -rf /var/cache/apk/*
 
 ENV BUILD_ROOT=/go/src/github.com/sipcapture/heplify-server/
 COPY . ${BUILD_ROOT} 
 
 RUN cd ${BUILD_ROOT} \
+  && go version \
+  && export GO111MODULE=on \
+  && go mod vendor\
   && cp vendor/* /go/src/ -rf \
   && cd ${BUILD_ROOT}/cmd/heplify-server \
-  && GO111MODULE=on go mod vendor\
+  && ls \
   && CGO_ENABLED=0 GOOS=linux go build -v -a -ldflags '-s -w' -installsuffix cgo -o  /go/bin/heplify-server \
-  && rm -rf /go/src/
+RUN rm -rf /go/src/
 
 FROM alpine:latest
 LABEL maintainer="zhouxq@ti-net.com.cn"
