@@ -19,4 +19,5 @@ m4 -D LISTEN_HOST=$ENV_LISTEN_HOST \
 
 chmod 775 $PATH_HEPLIFY_SERVER_TOML
 
-/root/heplify-server /root/heplify-server.toml
+
+/root/heplify-server
