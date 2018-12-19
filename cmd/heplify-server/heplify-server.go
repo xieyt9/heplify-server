@@ -8,9 +8,6 @@ import (
 	"sync"
 	"syscall"
 
-	//"net"
-	//_ "net/http/pprof"
-
 	"github.com/koding/multiconfig"
 	"github.com/negbie/logp"
 	"github.com/sipcapture/heplify-server/config"
@@ -18,10 +15,6 @@ import (
 
 	"github.com/sipcapture/heplify-server/cmd/heplify-server/app"
 	"github.com/sipcapture/heplify-server/cmd/heplify-server/app/options"
-
-	//"github.com/seanchann/goutil/flag"
-//	"github.com/seanchann/goutil/logs"
-	//"github.com/spf13/pflag"
 )
 
 type server interface {
@@ -34,10 +27,7 @@ func init() {
 	var logging logp.Logging
 	var fileRotator logp.FileRotator
 
-	//c := multiconfig.New()
 	cfg := config.Get()
-	//new(config.HeplifyServer)
-	//c.MustLoad(cfg)
 	config.Setting = *cfg
 
 	if tomlExists(config.Setting.Config) {
@@ -78,8 +68,7 @@ func tomlExists(f string) bool {
 func homer_main() {
 
 	opt := options.NewSIPCapOptions()
-//	logs.InitLogs()
-//	defer logs.FlushLogs()
+
 	opt.HomerDataDSN = fmt.Sprintf("%s:%s@tcp(%s)/homer_data",config.Setting.DBUser,
 									config.Setting.DBPass,
 									config.Setting.DBAddr)

@@ -34,6 +34,7 @@ require (
 	github.com/robfig/cron v0.0.0-20180505203441-b41be1df6967
 	github.com/seanchann/goutil v0.0.0-20181128082858-be959d940cf7
 	github.com/spf13/pflag v1.0.3
+	github.com/stretchr/testify v1.2.2
 )
 
 replace github.com/sipcapture/heplify-server => github.com/ti-net/heplify-server v0.0.0-20181121032026-54aa4226ca84
