@@ -11,12 +11,11 @@ COPY . ${BUILD_ROOT}
 
 RUN cd ${BUILD_ROOT} \
   && go version \
-  && export GO111MODULE=on \
-  && go mod vendor\
+  && export GO111MODULE= \
   && cp vendor/* /go/src/ -rf \
   && cd ${BUILD_ROOT}/cmd/heplify-server \
   && ls \
-  && CGO_ENABLED=0 GOOS=linux go build -v -a -ldflags '-s -w' -installsuffix cgo -o  /go/bin/heplify-server \
+  && CGO_ENABLED=0 GOOS=linux go build -v -mod=vendor -a -ldflags '-s -w' -installsuffix cgo -o  /go/bin/heplify-server \
 RUN rm -rf /go/src/
 
 FROM alpine:latest
