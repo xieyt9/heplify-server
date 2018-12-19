@@ -3,7 +3,7 @@ FROM golang:alpine as builder
 LABEL maintainer="zhouxq@ti-net.com.cn"
 
 RUN set -ex \
-  && apk add --update git bash\
+  && apk add --update bash\
   && rm -rf /var/cache/apk/*
 
 ENV BUILD_ROOT=/go/src/github.com/sipcapture/heplify-server/
@@ -14,7 +14,7 @@ RUN cd ${BUILD_ROOT} \
   && export GO111MODULE=on \
   && cp vendor/* /go/src/ -rf \
   && cd ${BUILD_ROOT}/cmd/heplify-server \
-  && ls \
+  && ls /go/src/\
   && CGO_ENABLED=0 GOOS=linux go build -mod=vendor  -v  -a -ldflags '-s -w' -installsuffix cgo -o  /go/bin/heplify-server \
   && rm -rf /go/src/
 
