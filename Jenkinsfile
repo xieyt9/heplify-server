@@ -5,7 +5,7 @@ pipeline {
   stages {
     stage('build2pub') {
       steps {
-        sh "build/make-build-image.sh TRUE"
+        sh "build/make-build-image.sh hepsrv TRUE"
       }
     }
   }

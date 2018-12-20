@@ -113,16 +113,52 @@ build_image() {
     yes | docker image prune
   fi
 }
+build_image_base() {
+  type=$1
+
+  dockerfile=$BUILD_ROOT_DIR/image/Dockerfile-homer-dev
+  build_context=$ROOT_DIR
+
+  image_base=registry.cn-beijing.aliyuncs.com/tinet-hub/homer
+  image_tag=${image_base}
+
+  get_version_vars $ROOT_DIR
+  ARG_VERSION=$GIT_VERSION
+  DOCKER_VERSION=$GIT_VERSION_SHORT
+  BUILD_TIME="ARG_BUILDTIME=$(date '+%Y-%m-%d+%H:%M:%S')"
+
+  local -r latest_tag="${image_tag}:latest-base"
+  local -r gitversiontag="${image_tag}:${DOCKER_VERSION}-base"
+
+
+  docker build --build-arg "$BUILD_TIME" --build-arg "TYPE=$type"  \
+    --build-arg "ARG_VERSION=$ARG_VERSION"  --rm -t "${gitversiontag}" -f "$dockerfile" "${build_context}"
+
+  local -ra tag_cmd=(docker tag $gitversiontag $latest_tag)
+  docker_tag_output=$("${tag_cmd[@]}")
+
+  # return git version image name
+  echo $gitversiontag
+
+  publish=$2
+  if [ "$publish" = "TRUE" ];then
+    docker push $gitversiontag
+    docker push $latest_tag
+    docker rmi $gitversiontag
+    docker rmi $latest_tag
+    yes | docker image prune
+  fi
+}
 
 function usage()
 {
   echo "---------------------------------usage------------------"
   echo "-------./make-build-image.sh [ type ] ------------------"
-  echo "-------type: hepsrv-------------------------------------"
+  echo "-------type: [hepsrv] [base]----------------------------"
 }
 
 case $HEP_TYPE in
-hepsrv)
+hepsrv|base)
   printf "**********will build image $HEP_TYPE\r\n"
   ;;
 *)
@@ -131,4 +167,10 @@ hepsrv)
   ;;
 esac
 
+if [ "$HEP_TYPE" = "hepsrv" ] 
+then
 build_image $HEP_TYPE $PUBLISH_FLAG
+elif [ "$HEP_TYPE" = "base" ] 
+then
+build_image_base $HEP_TYPE $PUBLISH_FLAG
+fi
