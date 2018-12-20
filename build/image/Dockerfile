@@ -12,6 +12,7 @@ COPY . ${BUILD_ROOT}
 RUN cd ${BUILD_ROOT} \
   && go version \
   && export GO111MODULE=on \
+  && go get github.com/BurntSushi/toml  \
   && cp vendor/* /go/src/ -rf \
   && cd ${BUILD_ROOT}/cmd/heplify-server \
   && ls /go/src/github.com/ \
