@@ -154,7 +154,7 @@ function usage()
 {
   echo "---------------------------------usage------------------"
   echo "-------./make-build-image.sh [ type ] ------------------"
-  echo "-------type: hepsrv-------------------------------------"
+  echo "-------type: [hepsrv] [base]----------------------------"
 }
 
 case $HEP_TYPE in
