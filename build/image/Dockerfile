@@ -3,7 +3,7 @@ FROM golang:alpine as builder
 LABEL maintainer="zhouxq@ti-net.com.cn"
 
 RUN set -ex \
-  && apk add --update bash\
+  && apk add --update git bash\
   && rm -rf /var/cache/apk/*
 
 ENV BUILD_ROOT=/go/src/github.com/sipcapture/heplify-server/
