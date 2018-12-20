@@ -2,13 +2,14 @@ package query
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
+	"time"
+
 	"github.com/sipcapture/heplify-server/pkg/api"
 	"github.com/sipcapture/heplify-server/pkg/storage/helper"
 	"github.com/sipcapture/heplify-server/pkg/storage/mysqls"
 	utils "github.com/sipcapture/heplify-server/pkg/utils"
-	"strconv"
-	"strings"
-	"time"
 )
 
 const (
@@ -43,8 +44,10 @@ func QuerySIPCaptureCall(searchdatareq api.SearchDataRequest) ([]api.SIPData, er
 	fromsplitcode, fromsplitresult := utils.SplitParam(fromparam)
 	tosplitcode, tosplitresult := utils.SplitParam(toparam)
 
-	fromdate := utils.TsToDT(timefrom)
-	todate := utils.TsToDT(timeto)
+	//	fromdate := utils.TsToDT(timefrom)
+	//	todate := utils.TsToDT(timeto)
+	fromdate := utils.TsToDTUTC(timefrom)
+	todate := utils.TsToDTUTC(timeto)
 	fromdateutc := utils.TsToDTUTC(timefrom)
 	todateutc := utils.TsToDTUTC(timeto)
 
