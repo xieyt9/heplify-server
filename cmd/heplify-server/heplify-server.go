@@ -66,7 +66,6 @@ func tomlExists(f string) bool {
 	return err == nil
 }
 func homer_main() {
-	fmt.Printf("%+v\n\n", config.Setting)
 	opt := options.NewSIPCapOptions()
 
 	opt.HomerDataDSN = fmt.Sprintf("%s:%s@tcp(%s)/homer_data",config.Setting.DBUser,
@@ -76,7 +75,7 @@ func homer_main() {
 	opt.Server.SwaggerPath = config.Setting.SwaggerPath
 	opt.Server.AdminPwd = config.Setting.AdminPwd
 	opt.Server.InsecurePort = config.Setting.InsecurePort
-	fmt.Printf("%+v\n\n", opt)
+
 	if err := app.Run(opt); err != nil {
 		fmt.Fprintf(os.Stderr, "%v\n", err)
 		os.Exit(1)

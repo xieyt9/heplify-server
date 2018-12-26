@@ -88,7 +88,6 @@ type SQLHomer5 struct {
 func (s *SQLHomer5) setup() error {
 	var err error
 	addr := strings.Split(config.Setting.DBAddr, ":")
-	fmt.Printf("SQLHomer5:%+v\n\n", config.Setting)
 	if len(addr) != 2 {
 		err = fmt.Errorf("faulty database address: %v, format should be localhost:3306", config.Setting.DBAddr)
 		return err
