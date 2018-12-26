@@ -76,7 +76,7 @@ func homer_main() {
 	opt.Server.SwaggerPath = config.Setting.SwaggerPath
 	opt.Server.AdminPwd = config.Setting.AdminPwd
 	opt.Server.InsecurePort = config.Setting.InsecurePort
-	fmt.Printf("%+v\n\n", opt.Server)
+	fmt.Printf("%+v\n\n", opt)
 	if err := app.Run(opt); err != nil {
 		fmt.Fprintf(os.Stderr, "%v\n", err)
 		os.Exit(1)
