@@ -326,7 +326,7 @@ func dbMaintain() error {
 	loc, _ := time.LoadLocation("Asia/Shanghai")
 	nowtime := time.Now().In(loc)
 
-	dropTableDuration := time.Duration(time.Hour * 24 * 3)
+	dropTableDuration := time.Duration(time.Hour * 24 * config.Setting.DropTableDays)
 	newTableDuration := time.Duration(time.Hour * 24)
 	nextTableDuration := time.Duration(time.Hour * 24 * 2)
 
