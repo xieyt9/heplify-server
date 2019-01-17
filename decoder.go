@@ -134,12 +134,31 @@ func (h *HEP) parse(packet []byte) error {
 				}
 			}
 		}
+	}else {
+		switch h.ProtoType {
+		case 5:
+			h.DiscardHEP("rtcp")
+		case 34, 35, 38:
+			h.DiscardHEP("report")
+		case 53:
+			h.DiscardHEP("dns")
+		case 100:
+			h.DiscardHEP("log")
+		}
 	}
 
 	logp.Debug("hep", "%+v\n\n", h)
 	return nil
 }
-
+func (h *HEP) DiscardHEP(Type string) {
+	if len(config.Setting.DiscardProtoType) > 0 {
+		for k := range config.Setting.DiscardProtoType {
+			if config.Setting.DiscardProtoType[k] == Type {
+				h.Payload = "DISCARD"
+			}
+		}
+	}
+}
 func (h *HEP) parseHEP(packet []byte) error {
 	length := binary.BigEndian.Uint16(packet[4:6])
 	if int(length) != len(packet) {
