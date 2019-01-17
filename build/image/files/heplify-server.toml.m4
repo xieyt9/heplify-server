@@ -29,6 +29,7 @@ DBDropDays      = 0
 DBDropOnStart   = false
 Dedup           = false
 DiscardMethod   = ["OPTIONS"]
+DiscardProtoType= ["rtcp"]
 AlegIDs         = []
 LogDbg          = ""
 LogLvl          = "info"
