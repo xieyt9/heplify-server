@@ -40,4 +40,4 @@ InsecurePort    = 80
 AdminPwd        = "test123"
 SwaggerPath     = ""
 UIPath          = "/homer-ui/"
-DropTableDays   = "DROP_TABLE_DAYS"
+DropTableDays   = DROP_TABLE_DAYS
