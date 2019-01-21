@@ -340,6 +340,7 @@ func dbMaintain() error {
 	dropTableSIPReg := fmt.Sprintf("%s_%d%02d%02d", sipCaputureRegAllTable, dropTableDate.Year(), int(dropTableDate.Month()), dropTableDate.Day())
 	dropTableSIPRest := fmt.Sprintf("%s_%d%02d%02d", sipCaputureRestAllTable, dropTableDate.Year(), int(dropTableDate.Month()), dropTableDate.Day())
 
+	glog.Infof("database DropTableDays(%d) dropTableDate(%v) dropTableISUP(%s)", config.Setting.DropTableDays, dropTableDate, dropTableISUP)
 	dbhandle.DropTableIfExists(dropTableISUP)
 	dbhandle.DropTableIfExists(dropTableRTCP)
 	dbhandle.DropTableIfExists(dropTableSIPCall)
