@@ -47,6 +47,7 @@ type HeplifyServer struct {
 	AdminPwd        string   `default:"test123"`
 	SwaggerPath     string   `default:"/third_party/swagger-ui"`
 	UIPath          string   `default:"/homer-ui/"`
+	DropTableDays    int      `default:"3"`
 }
 
 func NewConfig() *HeplifyServer {
