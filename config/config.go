@@ -93,6 +93,7 @@ func NewConfig() *HeplifyServer {
 		AdminPwd:        "test123",
 		SwaggerPath:     "/third_party/swagger-ui",
 		UIPath:          "/homer-ui/",
+		DropTableDays:   3,
 	}
 }
 
