@@ -9,5 +9,6 @@ ENV_DB_HOST=test-db.com
 ENV_DB_PORT=3306
 ENV_LISTEN_HOST=0.0.0.0
 ENV_DB_BULK=1000
+ENV_DB_TIMER=5
 ```
 - `sh -x deploy.sh`
