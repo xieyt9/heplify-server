@@ -16,6 +16,7 @@ import (
 	"github.com/golang/glog"
 	"github.com/sipcapture/heplify-server/pkg/storage/helper"
 	"github.com/sipcapture/heplify-server/pkg/storage/mysqls"
+	"github.com/sipcapture/heplify-server/config"
 
 	"github.com/jinzhu/now"
 )
@@ -326,7 +327,7 @@ func dbMaintain() error {
 	loc, _ := time.LoadLocation("Asia/Shanghai")
 	nowtime := time.Now().In(loc)
 
-	dropTableDuration := time.Duration(time.Hour * 24 * 3)
+	dropTableDuration := time.Duration(time.Hour * 24 * time.Duration(config.Setting.DropTableDays))
 	newTableDuration := time.Duration(time.Hour * 24)
 	nextTableDuration := time.Duration(time.Hour * 24 * 2)
 
@@ -340,6 +341,7 @@ func dbMaintain() error {
 	dropTableSIPReg := fmt.Sprintf("%s_%d%02d%02d", sipCaputureRegAllTable, dropTableDate.Year(), int(dropTableDate.Month()), dropTableDate.Day())
 	dropTableSIPRest := fmt.Sprintf("%s_%d%02d%02d", sipCaputureRestAllTable, dropTableDate.Year(), int(dropTableDate.Month()), dropTableDate.Day())
 
+	glog.Infof("database DropTableDays(%d) dropTableDate(%v) dropTableISUP(%s)", config.Setting.DropTableDays, dropTableDate, dropTableISUP)
 	dbhandle.DropTableIfExists(dropTableISUP)
 	dbhandle.DropTableIfExists(dropTableRTCP)
 	dbhandle.DropTableIfExists(dropTableSIPCall)

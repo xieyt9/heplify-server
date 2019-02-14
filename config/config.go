@@ -36,6 +36,7 @@ type HeplifyServer struct {
 	DBDropOnStart   bool     `default:"false"`
 	Dedup           bool     `default:"false"`
 	DiscardMethod   []string `default:""`
+	DiscardProtoType []string `default:""`
 	AlegIDs         []string `default:""`
 	LogDbg          string   `default:""`
 	LogLvl          string   `default:"info"`
@@ -46,6 +47,7 @@ type HeplifyServer struct {
 	AdminPwd        string   `default:"test123"`
 	SwaggerPath     string   `default:"/third_party/swagger-ui"`
 	UIPath          string   `default:"/homer-ui/"`
+	DropTableDays    int      `default:"3"`
 }
 
 func NewConfig() *HeplifyServer {
@@ -81,6 +83,7 @@ func NewConfig() *HeplifyServer {
 		DBDropOnStart:   false,
 		Dedup:           false,
 		DiscardMethod:   nil,
+		DiscardProtoType: nil,
 		AlegIDs:         nil,
 		LogDbg:          "",
 		LogLvl:          "info",
@@ -91,6 +94,7 @@ func NewConfig() *HeplifyServer {
 		AdminPwd:        "test123",
 		SwaggerPath:     "/third_party/swagger-ui",
 		UIPath:          "/homer-ui/",
+		DropTableDays:   3,
 	}
 }
 
