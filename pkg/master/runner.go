@@ -14,9 +14,9 @@ import (
 	"time"
 
 	"github.com/golang/glog"
+	"github.com/sipcapture/heplify-server/config"
 	"github.com/sipcapture/heplify-server/pkg/storage/helper"
 	"github.com/sipcapture/heplify-server/pkg/storage/mysqls"
-	"github.com/sipcapture/heplify-server/config"
 
 	"github.com/jinzhu/now"
 )
@@ -175,15 +175,8 @@ func createSIPCallTable(handle *mysqls.Store, tablename string) {
  		node varchar(125) NOT NULL DEFAULT '',
  		msg varchar(1500) NOT NULL DEFAULT '',
  		PRIMARY KEY (id,date),
- 		KEY ruri_user (ruri_user),
- 		KEY from_user (from_user),
- 		KEY to_user (to_user),
- 		KEY pid_user (pid_user),
- 		KEY auth_user (auth_user),
- 		KEY callid_aleg (callid_aleg),
  		KEY date (date),
- 		KEY callid (callid),
- 		KEY method (method)
+ 		KEY callid (callid)
 	 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED KEY_BLOCK_SIZE=8`, tablename)
 
 	dbhandle.Exec(sql)
@@ -238,14 +231,9 @@ func createSIPRegTable(handle *mysqls.Store, tablename string) {
  		node varchar(125) NOT NULL DEFAULT '',
  		msg varchar(1500) NOT NULL DEFAULT '',
  		PRIMARY KEY (id,date),
- 		KEY ruri_user (ruri_user),
  		KEY from_user (from_user),
  		KEY to_user (to_user),
- 		KEY pid_user (pid_user),
- 		KEY auth_user (auth_user),
- 		KEY callid_aleg (callid_aleg),
- 		KEY date (date),
- 		KEY callid (callid)
+ 		KEY date (date)
 	 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED KEY_BLOCK_SIZE=8`, tablename)
 
 	dbhandle.Exec(sql)
