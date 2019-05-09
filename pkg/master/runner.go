@@ -174,7 +174,9 @@ func createSIPCallTable(handle *mysqls.Store, tablename string) {
  		type int(2) NOT NULL DEFAULT 0,
  		node varchar(125) NOT NULL DEFAULT '',
  		msg varchar(1500) NOT NULL DEFAULT '',
- 		PRIMARY KEY (id,date),
+		PRIMARY KEY (id,date),
+		KEY from_user (from_user),
+		KEY to_user (to_user),
  		KEY date (date),
  		KEY callid (callid)
 	 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED KEY_BLOCK_SIZE=8`, tablename)
@@ -232,7 +234,8 @@ func createSIPRegTable(handle *mysqls.Store, tablename string) {
  		msg varchar(1500) NOT NULL DEFAULT '',
  		PRIMARY KEY (id,date),
  		KEY from_user (from_user),
- 		KEY to_user (to_user),
+		 KEY to_user (to_user),
+		 KEY callid (callid),
  		KEY date (date)
 	 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED KEY_BLOCK_SIZE=8`, tablename)
 
