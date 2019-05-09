@@ -103,7 +103,7 @@ func QuerySIPCaptureCall(searchdatareq api.SearchDataRequest) ([]api.SIPData, er
 			dbhandletmp = dbhandletmp.Where("callid = ?", callid)
 		}
 		dbhandletmp = dbhandletmp.Limit(250)
-		dbhandletmp = dbhandletmp.Order("id")
+		//dbhandletmp = dbhandletmp.Order("id")
 		dbhandletmp.Find(&sipdatatmp)
 		if len(sipdatatmp) != 0 {
 			sipdata = append(sipdata, sipdatatmp...)
