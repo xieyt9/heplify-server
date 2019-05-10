@@ -13,6 +13,7 @@ import (
 	"github.com/gobuffalo/packr"
 	_ "github.com/lib/pq"
 	"github.com/negbie/logp"
+       "github.com/sipcapture/heplify-server"
 	"github.com/sipcapture/heplify-server/config"
 )
 
