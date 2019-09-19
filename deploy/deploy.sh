@@ -18,8 +18,8 @@ function homer_default_env(){
     envfile=/home/homer/config/env
     if [ ! -f $envfile ];then
       touch $envfile
-	  echo "请输入数据库密码:"
-	  read  PASSWORD
+      echo "请输入数据库密码:"
+      read  PASSWORD
       echo 'ENV_DB_USER=root' >> $envfile
       echo 'ENV_DB_PASSWORD='$PASSWORD >> $envfile
       echo 'ENV_DB_HOST=127.0.0.1' >> $envfile
@@ -31,7 +31,7 @@ function homer_default_env(){
 }
 function deploy_mysql(){
     echo "请输入数据库密码:"
-	read  PASSWORD
+    read  PASSWORD
     docker run  --restart always  \
     --privileged=true \
     --name mysql-56 \
@@ -79,14 +79,14 @@ function main()
             echo 'deploy homer'
             homer_default_env
             deploy_homer
-			      exit
+            exit
         ;;
-		    3)
+            3)
             echo 'update homer'
             homer_default_env
-			      docker rm -f homer
+            docker rm -f homer
             deploy_homer
-			      exit
+            exit
         ;;
         9)
             start
