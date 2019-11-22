@@ -139,7 +139,8 @@ build_image_hepipe() {
   # return git version image name
   echo $gitversiontag
 
-  publish=$2
+  publish=TRUE
+
   if [ "$publish" = "TRUE" ];then
     docker push $gitversiontag
     docker push $latest_tag
