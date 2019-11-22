@@ -119,7 +119,7 @@ build_image_hepipe() {
   dockerfile=$BUILD_ROOT_DIR/image/Dockerfile-hepipe
   build_context=$ROOT_DIR
 
-  image_base=registry.cn-beijing.aliyuncs.com/tinet-hub/homer
+  image_base=registry.cn-beijing.aliyuncs.com/tinet-hub/homer-hepipe
   image_tag=${image_base}
 
   get_version_vars $ROOT_DIR
@@ -127,8 +127,8 @@ build_image_hepipe() {
   DOCKER_VERSION=$GIT_VERSION_SHORT
   BUILD_TIME="ARG_BUILDTIME=$(date '+%Y-%m-%d+%H:%M:%S')"
 
-  local -r latest_tag="${image_tag}:latest-hepipe"
-  local -r gitversiontag="${image_tag}:${DOCKER_VERSION}-hepipe"
+  local -r latest_tag="${image_tag}:latest"
+  local -r gitversiontag="${image_tag}:${DOCKER_VERSION}"
 
   docker build --build-arg "$BUILD_TIME" --build-arg "TYPE=$type"  \
     --build-arg "ARG_VERSION=$ARG_VERSION"  --rm -t "${gitversiontag}" -f "$dockerfile" "${build_context}"
