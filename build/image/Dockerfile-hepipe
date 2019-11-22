@@ -1,0 +1,18 @@
+FROM node:12.11-alpine as builder
+
+LABEL maintainer="sunwei <sunwei@ti-net.com.cn>"
+
+RUN npm install -g forever \
+	&& mkdir /var/log/forever \
+	&& mkdir /var/log/hepipe \
+	&& npm install hep-js \
+	&& npm install receptacle
+
+COPY hepipe_source/* /usr/src/ 
+
+RUN chmod 777 /usr/src/hepipe_start.sh
+
+EXPOSE 7777 
+
+CMD ["sh","/usr/src/hepipe_start.sh"]
+

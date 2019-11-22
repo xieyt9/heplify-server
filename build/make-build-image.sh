@@ -94,6 +94,41 @@ build_image() {
   local -r latest_tag="${image_tag}:latest"
   local -r gitversiontag="${image_tag}:${DOCKER_VERSION}"
 
+  docker build --build-arg "$BUILD_TIME" --build-arg "TYPE=$type"  \
+    --build-arg "ARG_VERSION=$ARG_VERSION"  --rm -t "${gitversiontag}" -f "$dockerfile" "${build_context}"
+
+  local -ra tag_cmd=(docker tag $gitversiontag $latest_tag)
+  docker_tag_output=$("${tag_cmd[@]}")
+
+  # return git version image name
+  echo $gitversiontag
+
+  publish=$2
+  if [ "$publish" = "TRUE" ];then
+    docker push $gitversiontag
+    docker push $latest_tag
+    docker rmi $gitversiontag
+    docker rmi $latest_tag
+    yes | docker image prune
+  fi
+}
+
+build_image_hepipe() {
+  type=$1
+
+  dockerfile=$BUILD_ROOT_DIR/image/Dockerfile-hepipe
+  build_context=$ROOT_DIR
+
+  image_base=registry.cn-beijing.aliyuncs.com/tinet-hub/homer
+  image_tag=${image_base}
+
+  get_version_vars $ROOT_DIR
+  ARG_VERSION=$GIT_VERSION
+  DOCKER_VERSION=$GIT_VERSION_SHORT
+  BUILD_TIME="ARG_BUILDTIME=$(date '+%Y-%m-%d+%H:%M:%S')"
+
+  local -r latest_tag="${image_tag}:latest-hepipe"
+  local -r gitversiontag="${image_tag}:${DOCKER_VERSION}-hepipe"
 
   docker build --build-arg "$BUILD_TIME" --build-arg "TYPE=$type"  \
     --build-arg "ARG_VERSION=$ARG_VERSION"  --rm -t "${gitversiontag}" -f "$dockerfile" "${build_context}"
@@ -113,6 +148,7 @@ build_image() {
     yes | docker image prune
   fi
 }
+
 build_image_base() {
   type=$1
 
@@ -154,11 +190,11 @@ function usage()
 {
   echo "---------------------------------usage------------------"
   echo "-------./make-build-image.sh [ type ] ------------------"
-  echo "-------type: [hepsrv] [base]----------------------------"
+  echo "-------type: [hepsrv] [base] [hepipe]----------------------------"
 }
 
 case $HEP_TYPE in
-hepsrv|base)
+hepsrv|base|hepipe)
   printf "**********will build image $HEP_TYPE\r\n"
   ;;
 *)
@@ -173,4 +209,7 @@ build_image $HEP_TYPE $PUBLISH_FLAG
 elif [ "$HEP_TYPE" = "base" ] 
 then
 build_image_base $HEP_TYPE $PUBLISH_FLAG
+elif [ "$HEP_TYPE" = "hepipe" ] 
+then
+build_image_hepipe $HEP_TYPE $PUBLISH_FLAG
 fi
