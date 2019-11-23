@@ -2,10 +2,16 @@
 
 pipeline {
   agent any
+
+  parameters {
+    choice(choices: "hepsrv\n"+
+      "hepipe", description: 'product type', name: 'HEP_TYPE')
+  }
+
   stages {
     stage('build2pub') {
       steps {
-        sh "build/make-build-image.sh hepsrv TRUE"
+        sh "build/make-build-image.sh ${params.HEP_TYPE}"
       }
     }
   }
