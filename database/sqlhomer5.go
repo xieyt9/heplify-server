@@ -13,7 +13,7 @@ import (
 	"github.com/gobuffalo/packr"
 	_ "github.com/lib/pq"
 	"github.com/negbie/logp"
-	"github.com/sipcapture/heplify-server"
+       "github.com/sipcapture/heplify-server"
 	"github.com/sipcapture/heplify-server/config"
 )
 
@@ -343,7 +343,9 @@ func (s *SQLHomer5) insert(hCh chan *decoder.HEP) {
 
 func (s *SQLHomer5) bulkInsert(query string, rows []interface{}, values string) {
 	if config.Setting.DBDriver == "mysql" {
-		tableDate := time.Now().UTC().Format("20060102")
+		//tableDate := time.Now().UTC().Format("20060102")
+		loc, _ := time.LoadLocation("Asia/Shanghai")
+		tableDate := time.Now().In(loc).Format("20060102")
 		switch query {
 		case "call":
 			query = "INSERT INTO sip_capture_call_" + tableDate + values
@@ -380,7 +382,7 @@ func (s *SQLHomer5) bulkInsert(query string, rows []interface{}, values string) 
 	}
 
 	logp.Debug("sql", "%s\n\n%v\n\n", query, rows)
-	
+
 	//prepare the statement
 	// stmt, err := s.db.Prepare(query)
 	// if err != nil {

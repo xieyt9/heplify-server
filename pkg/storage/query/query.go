@@ -38,11 +38,11 @@ func QuerySIPCaptureCall(searchdatareq api.SearchDataRequest) ([]api.SIPData, er
 	timefrom := searchdatareq.TimeStamp.From
 	timeto := searchdatareq.TimeStamp.To
 	fromparam := searchdatareq.Param.Search.FromUser
-	toparam := searchdatareq.Param.Search.ToUser
+	//toparam := searchdatareq.Param.Search.ToUser
 	callid := searchdatareq.Param.Search.CallID
 
 	fromsplitcode, fromsplitresult := utils.SplitParam(fromparam)
-	tosplitcode, tosplitresult := utils.SplitParam(toparam)
+	//tosplitcode, tosplitresult := utils.SplitParam(toparam)
 
 	//	fromdate := utils.TsToDT(timefrom)
 	//	todate := utils.TsToDT(timeto)
@@ -89,7 +89,7 @@ func QuerySIPCaptureCall(searchdatareq api.SearchDataRequest) ([]api.SIPData, er
 				dbhandletmp = dbhandletmp.Where("source_ip = ?", fromsplitresult[1])
 			}
 		}
-		if tosplitcode != 0 {
+		/*if tosplitcode != 0 && strings.Contains(tablename[idx], sipCaputureCallAllTable) {
 			if tosplitcode == 1 {
 				dbhandletmp = dbhandletmp.Where("to_user = ?", tosplitresult[0])
 			} else if tosplitcode == 2 {
@@ -98,12 +98,12 @@ func QuerySIPCaptureCall(searchdatareq api.SearchDataRequest) ([]api.SIPData, er
 				dbhandletmp = dbhandletmp.Where("to_user = ?", tosplitresult[0])
 				dbhandletmp = dbhandletmp.Where("destination_ip = ?", tosplitresult[1])
 			}
-		}
-		if callid != "" {
+		}*/
+		if callid != "" && strings.Contains(tablename[idx], sipCaputureCallAllTable) {
 			dbhandletmp = dbhandletmp.Where("callid = ?", callid)
 		}
 		dbhandletmp = dbhandletmp.Limit(250)
-		dbhandletmp = dbhandletmp.Order("id")
+		//dbhandletmp = dbhandletmp.Order("id")
 		dbhandletmp.Find(&sipdatatmp)
 		if len(sipdatatmp) != 0 {
 			sipdata = append(sipdata, sipdatatmp...)
