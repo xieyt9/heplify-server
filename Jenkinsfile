@@ -11,7 +11,7 @@ pipeline {
   stages {
     stage('build2pub') {
       steps {
-        sh "build/make-build-image.sh ${params.HEP_TYPE}"
+        sh "build/make-build-image.sh ${params.HEP_TYPE} TRUE"
       }
     }
   }
