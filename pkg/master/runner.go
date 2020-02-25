@@ -173,7 +173,7 @@ func createSIPCallTable(handle *mysqls.Store, tablename string) {
  		rtp_stat varchar(256) NOT NULL DEFAULT '',
  		type int(2) NOT NULL DEFAULT 0,
  		node varchar(125) NOT NULL DEFAULT '',
- 		msg varchar(1500) NOT NULL DEFAULT '',
+ 		msg varchar(3000) NOT NULL DEFAULT '',
 		PRIMARY KEY (id,date),
 		KEY from_user (from_user),
  		KEY date (date),
