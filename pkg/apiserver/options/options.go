@@ -12,6 +12,7 @@ type ServerOption struct {
 	TLSPrivateKeyFile string
 	UIPath            string
 	AdminPwd          string
+	EnableUI          bool
 }
 
 //NewServerOption new apiserver options
