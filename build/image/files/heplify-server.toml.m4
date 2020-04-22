@@ -41,3 +41,4 @@ AdminPwd        = "test123"
 SwaggerPath     = ""
 UIPath          = "/homer-ui/"
 DropTableDays   = DROP_TABLE_DAYS
+EnableUI        = ENABLE_UI

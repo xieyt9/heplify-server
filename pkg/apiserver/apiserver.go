@@ -19,6 +19,7 @@ type APIServer struct {
 	TLSCertFile       string
 	TLSPrivateKeyFile string
 	UIPath            string
+	EnableUI          bool
 
 	wsContainer *restful.Container
 }
@@ -34,6 +35,7 @@ func NewAPIServer(config *options.ServerOption) *APIServer {
 		TLSCertFile:       config.TLSCertFile,
 		TLSPrivateKeyFile: config.TLSPrivateKeyFile,
 		UIPath:            config.UIPath,
+		EnableUI:          config.EnableUI,
 	}
 }
 

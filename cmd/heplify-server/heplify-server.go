@@ -11,7 +11,7 @@ import (
 	"github.com/koding/multiconfig"
 	"github.com/negbie/logp"
 	"github.com/sipcapture/heplify-server/config"
-	"github.com/sipcapture/heplify-server/server"
+	input "github.com/sipcapture/heplify-server/server"
 
 	"github.com/sipcapture/heplify-server/cmd/heplify-server/app"
 	"github.com/sipcapture/heplify-server/cmd/heplify-server/app/options"
@@ -68,13 +68,14 @@ func tomlExists(f string) bool {
 func homer_main() {
 	opt := options.NewSIPCapOptions()
 
-	opt.HomerDataDSN = fmt.Sprintf("%s:%s@tcp(%s)/homer_data",config.Setting.DBUser,
-									config.Setting.DBPass,
-									config.Setting.DBAddr)
+	opt.HomerDataDSN = fmt.Sprintf("%s:%s@tcp(%s)/homer_data", config.Setting.DBUser,
+		config.Setting.DBPass,
+		config.Setting.DBAddr)
 	opt.Server.UIPath = config.Setting.UIPath
 	opt.Server.SwaggerPath = config.Setting.SwaggerPath
 	opt.Server.AdminPwd = config.Setting.AdminPwd
 	opt.Server.InsecurePort = config.Setting.InsecurePort
+	opt.Server.EnableUI = config.Setting.EnableUI
 
 	if err := app.Run(opt); err != nil {
 		fmt.Fprintf(os.Stderr, "%v\n", err)

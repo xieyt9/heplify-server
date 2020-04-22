@@ -81,6 +81,8 @@ func (apis *APIServer) installSwaggerAPI(container *restful.Container, secure bo
 
 func (apis *APIServer) install(container *restful.Container) error {
 	installLoginSrv(container)
-	apis.installUI(container)
+	if apis.EnableUI {
+		apis.installUI(container)
+	}
 	return nil
 }
